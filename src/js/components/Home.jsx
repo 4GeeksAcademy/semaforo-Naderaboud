@@ -2,29 +2,17 @@ import React, { useEffect, useState } from "react";
 
 //include images into your bundle
 import rigoImage from "../../img/rigo-baby.jpg";
+import { render } from "react-dom";
+import { TrafficLight } from "./TrafficLight";
+import { use } from "react";
 
 //create your first component
 const Home = () => {
 	const [color, setColor] = useState("")
 
-	const onSelectLight = (lightColor) => {
-
-		switch (lightColor) {
-			case lightColor === "red":
-			setColor("red")
-				break;
-			case lightColor === "yellow":
-			setColor("yellow")
-
-				break;
-			case lightColor === "green":
-			setColor("green")
-
-				break;
-			default:
-				break;
-		}
-	}
+	useEffect(() => {
+		console.log("Color changed to:", color);
+	}, [color]);
 
 	return (
 		<>
@@ -33,10 +21,7 @@ const Home = () => {
 			</div>
 			<div className="traffic-light-container">
 
-				<div className={"btn btn-danger light red " + (color === "red" ? "selected": "")} onClick={onSelectLight("red")}></div>
-				<div className={"btn btn-warning light yellow "+ (color === "yellow" ? "selected": "")}></div>
-				<div className={"btn btn-success light green " + (color === "green" ? "selected": "")}></div>
-
+				<TrafficLight color={color} onSetColor={setColor} />
 
 			</div>
 		</>
